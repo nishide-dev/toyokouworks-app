@@ -10,7 +10,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
     <body>
       <NextUIProvider>
         <NextThemesProvider attribute='class' defaultTheme='dark'>
-          <main>
+          <main className='min-h-screen'>
             <Header />
             {children}
           </main>

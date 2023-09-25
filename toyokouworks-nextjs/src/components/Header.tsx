@@ -17,18 +17,7 @@ import { TWLogo } from './icons/TWLogo'
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
-  const menuItems = [
-    'Profile',
-    'Dashboard',
-    'Activity',
-    'Analytics',
-    'System',
-    'Deployments',
-    'My Settings',
-    'Team Settings',
-    'Help & Feedback',
-    'Log Out',
-  ]
+  const menuItems = ['Profile', 'Dashboard', 'Activity', 'Analytics', 'Log Out']
 
   return (
     <Navbar onMenuOpenChange={setIsMenuOpen}>
@@ -39,7 +28,7 @@ const Header: React.FC = () => {
         />
         <NavbarBrand>
           <TWLogo />
-          <p className='font-bold text-inherit'>ACME</p>
+          <p className='font-bold text-inherit'>TOYOKOUWORKS</p>
         </NavbarBrand>
       </NavbarContent>
 
