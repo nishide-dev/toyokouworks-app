@@ -1,3 +1,37 @@
 {
-  "extends": "next/core-web-vitals"
+  "extends": [
+    "next",
+    "next/core-web-vitals",
+    "plugin:import/recommended",
+    "plugin:import/warnings",
+    "prettier"
+  ],
+  "settings": {
+    "import/resolver": "webpack"
+  },
+  "rules": {
+    "import/no-unresolved": "off",
+    "import/order": [
+      "error",
+      {
+        // グループごとの並び順
+        "groups": [
+          "builtin", // node "builtin" のモジュール
+          "external", // npm install したパッケージ
+          "internal", // パス設定したモジュール
+          ["parent", "sibling"], // 親階層と子階層のファイル
+          "object", // object-imports
+          "type", // 型だけをインポートする
+          "index" // 同階層のファイル
+        ],
+        // グループごとに改行を入れるか
+        "newlines-between": "always",
+        // アルファベット順・大文字小文字を区別なし
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
+      }
+    ]
+  }
 }
