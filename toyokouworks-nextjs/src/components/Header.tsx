@@ -13,6 +13,7 @@ import {
 import React, { useState } from 'react'
 
 import { TWLogo } from './icons/TWLogo'
+import ThemeSwitcher from './ThemeSwitcher'
 
 const Header: React.FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -74,6 +75,9 @@ const Header: React.FC = () => {
             </Link>
           </NavbarMenuItem>
         ))}
+        <NavbarMenuItem>
+            <ThemeSwitcher />
+        </NavbarMenuItem>
       </NavbarMenu>
     </Navbar>
   )
