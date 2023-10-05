@@ -34,7 +34,7 @@ const Header: React.FC = () => {
       </NavbarContent>
 
       <NavbarContent className='hidden sm:flex gap-4' justify='center'>
-        <NavbarItem>
+        {/* <NavbarItem>
           <Link color='foreground' href='#'>
             Features
           </Link>
@@ -48,20 +48,20 @@ const Header: React.FC = () => {
           <Link color='foreground' href='#'>
             Integrations
           </Link>
-        </NavbarItem>
+        </NavbarItem> */}
       </NavbarContent>
       <NavbarContent justify='end'>
-        <NavbarItem className='hidden lg:flex'>
+        <NavbarItem className='hidden'>
           <Link href='#'>Login</Link>
         </NavbarItem>
-        <NavbarItem>
+        <NavbarItem className='hidden'>
           <Button as={Link} color='primary' href='#' variant='flat'>
             Sign Up
           </Button>
         </NavbarItem>
       </NavbarContent>
       <NavbarMenu>
-        {menuItems.map((item, index) => (
+        {/* {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
             <Link
               color={
@@ -74,7 +74,7 @@ const Header: React.FC = () => {
               {item}
             </Link>
           </NavbarMenuItem>
-        ))}
+        ))} */}
         <NavbarMenuItem>
             <ThemeSwitcher />
         </NavbarMenuItem>

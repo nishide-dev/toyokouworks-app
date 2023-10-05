@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Data {
+  id        String    @id
+  raceId    String
+  current   Float
+  voltage   Float
+  createdAt DateTime  @default(now())
+  updatedAt DateTime?
+  deleted   Boolean   @default(false)
+  Race      Race      @relation(fields: [raceId], references: [id])
+}
+
+model Race {
+  id          String    @id
+  name        String
+  description String?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime?
+  deleted     Boolean   @default(false)
+  Data        Data[]
+}
