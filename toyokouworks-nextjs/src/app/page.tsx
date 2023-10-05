@@ -1,4 +1,5 @@
 'use client';
+import { Select, SelectItem } from "@nextui-org/react";
 import { Data } from "@prisma/client";
 import { Card, Title, AreaChart } from "@tremor/react";
 import Image from 'next/image'
@@ -21,12 +22,27 @@ export default function Home() {
     voltage: number;
     createdAt: Date;
   }>();
-  const { getData } = useData();
-  // 2秒に1回データを取得する
+  const [raceIds, setRaceIds] = useState<{
+    name: string;
+    createdAt: Date;
+  }[]>([]);
+  const [selected, setSelected] = useState<string>('test');
+  const { getData, getRaceIds } = useData();
+  useEffect(() => {
+    const fetchRaceIds = async () => {
+      const raceIds = await getRaceIds();
+      setRaceIds(raceIds as {
+        name: string;
+        createdAt: Date;
+      }[]);
+    }
+    fetchRaceIds();
+  }, []);
+  // 1秒に1回データを取得する
   useEffect(() => {
     const interval = setInterval(() => {
       const fetchData = async () => {
-        const data = await getData('test') as {
+        const data = await getData(selected) as {
           current: number;
           voltage: number;
           createdAt: Date;
@@ -35,12 +51,32 @@ export default function Home() {
         setLastData(data[data.length - 1]);
       }
       fetchData();
-    }, 2000);
+    }, 1000);
     return () => clearInterval(interval);
   });
 
+  const handleSlectionChange = async (
+    e: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    setSelected(e.target.value);
+  };
+
   return (
     <>
+      <div className="m-6">
+      <Select 
+        label="Select Race ID" 
+        className="max-w-xs"
+        value={selected}
+        onChange={handleSlectionChange}
+      >
+        {raceIds.map((raceId) => (
+          <SelectItem key={raceId.name} value={raceId.name}>
+            {raceId.name}
+          </SelectItem>
+        ))}
+      </Select>
+      </div>
       <div className='flex flex-col md:flex-row gap-6 h-screen items-center justify-center p-6'>
       <Card>
         <div className="flex justify-between">

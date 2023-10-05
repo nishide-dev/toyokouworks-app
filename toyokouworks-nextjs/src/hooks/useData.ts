@@ -31,8 +31,34 @@ export const useData = function () {
     }
   };
 
+  const getRaceIds = async () => {
+    setIsGetting(true);
+    try {
+        const response = (await fetchJson('/api/raceId')) as {
+            name: string;
+            createdAt: Date;
+        }[];
+        setGettingError('');
+        setIsGetting(false);
+        return response;
+        }
+    catch (e: any) {
+        if (e instanceof FetchError) {
+            setGettingError(e.data.message);
+        } else {
+            setGettingError(e?.message ?? 'unknown error');
+        }
+        return undefined;
+    }
+    finally {
+        setIsGetting(false);
+    }
+    };
+
+
   return {
     getData,
+    getRaceIds,
     gettingError,
     isGetting,
   };
