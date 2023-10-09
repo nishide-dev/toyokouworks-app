@@ -87,7 +87,7 @@ export default function Home() {
         <Card>
           <div className='flex justify-between'>
             <Title>Current</Title>
-            <Title>{lastData?.current ? Math.floor( lastData?.current / 1000 * Math.pow( 10, n ) ) / Math.pow( 10, n ) : 0} mA</Title>
+            <Title>{lastData?.current ? Math.floor( lastData?.current * Math.pow( 10, n ) ) / Math.pow( 10, n ) : 0} mA</Title>
           </div>
         </Card>
         <Card>
