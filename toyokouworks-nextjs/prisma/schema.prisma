@@ -12,6 +12,11 @@ model Data {
   raceId    String
   current   Float
   voltage   Float
+  integratedCurrent Float?
+  gpsSpeed     Float?
+  lat      Float?
+  lng      Float?
+  hallSpeed Float?
   createdAt DateTime  @default(now())
   updatedAt DateTime?
   deleted   Boolean   @default(false)

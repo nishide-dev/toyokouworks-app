@@ -76,7 +76,7 @@ const Header: React.FC = () => {
           </NavbarMenuItem>
         ))} */}
         <NavbarMenuItem>
-            <ThemeSwitcher />
+          <ThemeSwitcher />
         </NavbarMenuItem>
       </NavbarMenu>
     </Navbar>

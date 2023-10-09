@@ -1,65 +1,60 @@
-'use client';
-import { Data } from '@prisma/client';
-import { useEffect, useState, useCallback } from 'react';
+'use client'
+import { Data } from '@prisma/client'
+import { useEffect, useState, useCallback } from 'react'
 
-import fetchJson, { FetchError } from '@/lib/fetchJson';
+import fetchJson, { FetchError } from '@/lib/fetchJson'
 
 export const useData = function () {
-  const [gettingError, setGettingError] = useState<string>('');
-  const [isGetting, setIsGetting] = useState<boolean>(false);
+  const [gettingError, setGettingError] = useState<string>('')
+  const [isGetting, setIsGetting] = useState<boolean>(false)
 
-  const getData = async (
-    raceId: string,
-  ) => {
-    setIsGetting(true);
+  const getData = async (raceId: string) => {
+    setIsGetting(true)
     try {
       const response = (await fetchJson('/api/data', 'POST', {
         raceId: raceId,
-      })) as Data[];
-      setGettingError('');
-      setIsGetting(false);
-      return response;
+      })) as Data[]
+      setGettingError('')
+      setIsGetting(false)
+      return response
     } catch (e: any) {
       if (e instanceof FetchError) {
-        setGettingError(e.data.message);
+        setGettingError(e.data.message)
       } else {
-        setGettingError(e?.message ?? 'unknown error');
+        setGettingError(e?.message ?? 'unknown error')
       }
-      return undefined;
+      return undefined
     } finally {
-      setIsGetting(false);
+      setIsGetting(false)
     }
-  };
+  }
 
   const getRaceIds = async () => {
-    setIsGetting(true);
+    setIsGetting(true)
     try {
-        const response = (await fetchJson('/api/raceId')) as {
-            name: string;
-            createdAt: Date;
-        }[];
-        setGettingError('');
-        setIsGetting(false);
-        return response;
-        }
-    catch (e: any) {
-        if (e instanceof FetchError) {
-            setGettingError(e.data.message);
-        } else {
-            setGettingError(e?.message ?? 'unknown error');
-        }
-        return undefined;
+      const response = (await fetchJson('/api/raceId')) as {
+        name: string
+        createdAt: Date
+      }[]
+      setGettingError('')
+      setIsGetting(false)
+      return response
+    } catch (e: any) {
+      if (e instanceof FetchError) {
+        setGettingError(e.data.message)
+      } else {
+        setGettingError(e?.message ?? 'unknown error')
+      }
+      return undefined
+    } finally {
+      setIsGetting(false)
     }
-    finally {
-        setIsGetting(false);
-    }
-    };
-
+  }
 
   return {
     getData,
     getRaceIds,
     gettingError,
     isGetting,
-  };
-};
+  }
+}

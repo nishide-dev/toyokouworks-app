@@ -41,14 +41,7 @@ export default function Home() {
     const interval = setInterval(() => {
       const fetchData = async () => {
         const data = (await getData(selected)) as Data[]
-        const newData = data.map((d) => {
-          return {
-            ...d,
-            power: Math.floor((d.current * d.voltage) / 1000 * Math.pow( 10, n )) / Math.pow( 10, n ),
-          }
-        })
-        setData(newData)
-        // setData(data)
+        setData(data)
         setLastData(data[data.length - 1])
       }
       fetchData()
@@ -60,7 +53,7 @@ export default function Home() {
     setSelected(e.target.value)
   }
 
-    // 小数点第n位までを四捨五入する
+  // 小数点第n位までを四捨五入する
     const n = 2
 
   return (
@@ -90,48 +83,42 @@ export default function Home() {
             <h2 className='text-2xl'>{lastData?.integratedCurrent ? Math.floor((((3600 - lastData.integratedCurrent) / 3600) * 100) * Math.pow( 10, n )) / Math.pow( 10, n ) : 0.00} %</h2>
         </div>
       </div>
-      <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-center justify-center p-6'>
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-4 items-center justify-center p-6'>
         <Card>
           <div className='flex justify-between'>
             <Title>Current</Title>
             <Title>{lastData?.current ? Math.floor( lastData?.current / 1000 * Math.pow( 10, n ) ) / Math.pow( 10, n ) : 0} mA</Title>
           </div>
-          <AreaChart
-            className='h-72 mt-4'
-            data={data}
-            index='createdAt'
-            categories={['current']}
-            colors={['cyan']}
-            valueFormatter={dataFormatter}
-          />
         </Card>
         <Card>
           <div className='flex justify-between'>
             <Title>Voltage</Title>
             <Title>{lastData?.voltage ? Math.floor( lastData?.voltage / 1000 * Math.pow( 10, n ) ) / Math.pow( 10, n ) : 0} V</Title>
           </div>
-          <AreaChart
-            className='h-72 mt-4'
-            data={data}
-            index='createdAt'
-            categories={['voltage']}
-            colors={['cyan']}
-            valueFormatter={dataFormatter}
-          />
         </Card>
         <Card>
           <div className='flex justify-between'>
             <Title>Power</Title>
             <Title>{lastData?.current && lastData?.voltage ? Math.floor((lastData.current * lastData.voltage) / 1000 * Math.pow( 10, n )) / Math.pow( 10, n ) : 0} mW</Title>
           </div>
-          <AreaChart
-            className='h-72 mt-4'
-            data={data}
-            index='createdAt'
-            categories={['power']}
-            colors={['indigo']}
-            valueFormatter={dataFormatter}
-          />
+        </Card>
+        <Card>
+          <div className='flex justify-between'>
+            <Title>Integrated</Title>
+            <Title>{lastData?.integratedCurrent ? Math.floor((lastData.integratedCurrent) * Math.pow( 10, n )) / Math.pow( 10, n ) : 0.00} mAh</Title>
+          </div>
+        </Card>
+        <Card>
+          <div className='flex justify-between'>
+            <Title>Speed(G)</Title>
+            <Title>{lastData?.gpsSpeed ? Math.floor((lastData.gpsSpeed) * Math.pow( 10, n )) / Math.pow( 10, n ) : 0.00} km/h</Title>
+          </div>
+        </Card>
+        <Card>
+          <div className='flex justify-between'>
+            <Title>Speed(H)</Title>
+            <Title>{lastData?.hallSpeed ? Math.floor((lastData.hallSpeed) * Math.pow( 10, n )) / Math.pow( 10, n ) : 0.00} km/h</Title>
+          </div>
         </Card>
       </div>
     </>

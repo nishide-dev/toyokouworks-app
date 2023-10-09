@@ -1,22 +1,16 @@
-'use client';
-import { useSwitch, VisuallyHidden, SwitchProps } from '@nextui-org/react';
-import { useTheme } from 'next-themes';
-import React from 'react';
+'use client'
+import { useSwitch, VisuallyHidden, SwitchProps } from '@nextui-org/react'
+import { useTheme } from 'next-themes'
+import React from 'react'
 
-import { MoonIcon } from './icons/MoonIcon';
-import { SunIcon } from './icons/SunIcon';
+import { MoonIcon } from './icons/MoonIcon'
+import { SunIcon } from './icons/SunIcon'
 
 const ThemeSwitch = (props: SwitchProps) => {
-  const {
-    Component,
-    slots,
-    isSelected,
-    getBaseProps,
-    getInputProps,
-    getWrapperProps,
-  } = useSwitch(props);
+  const { Component, slots, isSelected, getBaseProps, getInputProps, getWrapperProps } =
+    useSwitch(props)
 
-  const { theme, setTheme } = useTheme();
+  const { theme, setTheme } = useTheme()
 
   return (
     <div className='flex flex-col gap-2 md:pr-4'>
@@ -27,7 +21,7 @@ const ThemeSwitch = (props: SwitchProps) => {
         <div
           {...getWrapperProps()}
           onClick={() => {
-            isSelected ? setTheme('dark') : setTheme('light');
+            isSelected ? setTheme('dark') : setTheme('light')
           }}
           color='primary'
           className={slots.wrapper({
@@ -42,9 +36,9 @@ const ThemeSwitch = (props: SwitchProps) => {
         </div>
       </Component>
     </div>
-  );
-};
+  )
+}
 
 export default function ThemeSwitcher() {
-  return <ThemeSwitch />;
+  return <ThemeSwitch />
 }

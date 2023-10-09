@@ -1,2 +1,5 @@
 .env
 rootKey.csv
+*.sh
+credentials.*
+*.DS_Store
