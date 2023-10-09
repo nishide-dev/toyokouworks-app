@@ -29,7 +29,7 @@ const Header: React.FC = () => {
         />
         <NavbarBrand>
           <TWLogo />
-          <p className='font-bold text-inherit'>TOYOKOUWORKS</p>
+          <Link href='/' className='font-bold text-inherit'>TOYOKOUWORKS</Link>
         </NavbarBrand>
       </NavbarContent>
 
@@ -51,12 +51,12 @@ const Header: React.FC = () => {
         </NavbarItem> */}
       </NavbarContent>
       <NavbarContent justify='end'>
-        <NavbarItem className='hidden'>
+        {/* <NavbarItem className='hidden'>
           <Link href='#'>Login</Link>
-        </NavbarItem>
-        <NavbarItem className='hidden'>
-          <Button as={Link} color='primary' href='#' variant='flat'>
-            Sign Up
+        </NavbarItem> */}
+        <NavbarItem className=''>
+          <Button as={Link} color='primary' href='/invehicle' variant='flat'>
+            車載用
           </Button>
         </NavbarItem>
       </NavbarContent>

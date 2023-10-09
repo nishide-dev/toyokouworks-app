@@ -11,13 +11,7 @@ const dataFormatter = (number: number) => {
 }
 
 export default function Home() {
-  const [data, setData] = useState<
-    {
-      current: number
-      voltage: number
-      createdAt: Date
-    }[]
-  >([])
+  const [data, setData] = useState<Data[]>([])
   const [lastData, setLastData] = useState<Data>()
   const [raceIds, setRaceIds] = useState<
     {

@@ -11,13 +11,7 @@ const dataFormatter = (number: number) => {
 }
 
 export default function Home() {
-  const [data, setData] = useState<
-    {
-      current: number
-      voltage: number
-      createdAt: Date
-    }[]
-  >([])
+  const [data, setData] = useState<Data[]>([])
   const [lastData, setLastData] = useState<Data>()
   const [raceIds, setRaceIds] = useState<
     {
@@ -58,7 +52,7 @@ export default function Home() {
 
   return (
     <>
-      <div className='m-6 mb-0 flex flex-col sm:flex-row'>
+      <div className='mx-6 flex gap-0 sm:gap-8 md:gap-0 flex-col sm:flex-row'>
         <div className="flex gap-4 items-center w-full">
             <Select
             label='Select Race ID'
@@ -78,12 +72,12 @@ export default function Home() {
                 disconnected
             </Chip>
         </div>
-        <div className="bg-blue-500 p-3 px-6 mt-3 max-w-sm md:max-w-[15rem] text-white rounded-2xl w-full">
+        <div className="bg-blue-500 flex gap-5 items-center p-4 px-6 mt-3 max-w-[10rem] md:max-w-[10rem] text-white rounded-2xl w-full">
             <h4 className='text-xs'>Battery</h4>
-            <h2 className='text-2xl'>{lastData?.integratedCurrent ? Math.floor((((3600 - lastData.integratedCurrent) / 3600) * 100) * Math.pow( 10, n )) / Math.pow( 10, n ) : 0.00} %</h2>
+            <h2 className='text-xl'>{lastData?.integratedCurrent ? Math.floor((((3600 - lastData.integratedCurrent) / 3600) * 100) * Math.pow( 10, n )) / Math.pow( 10, n ) : 0.00} %</h2>
         </div>
       </div>
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-4 items-center justify-center p-6'>
+      <div className='grid grid-cols-1 sm:grid-cols-3 gap-4 items-center justify-center p-6'>
         <Card>
           <div className='flex justify-between'>
             <Title>Current</Title>
