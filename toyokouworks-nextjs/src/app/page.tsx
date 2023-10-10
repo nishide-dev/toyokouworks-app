@@ -21,32 +21,21 @@ export default function Home() {
   >([])
   const [selected, setSelected] = useState<string>('')
   const { getData, getRaceIds } = useData()
-  // useEffect(() => {
-  //   const fetchRaceIds = async () => {
-  //     const raceIds = await getRaceIds()
-  //     setRaceIds(
-  //       raceIds as Race[],
-  //     )
-  //   }
-  //   fetchRaceIds()
-  // }, [])
   useEffect(() => {
-    const interval = setInterval(() => {
-      const fetchRaceIds = async () => {
-        const raceIds = await getRaceIds()
-        setRaceIds(
-          raceIds as Race[],
-        )
-      }
-      fetchRaceIds()
-    }, 5000)
-    return () => clearInterval(interval)
-  })
+    const fetchRaceIds = async () => {
+      const raceIds = await getRaceIds()
+      setRaceIds(
+        raceIds as Race[],
+      )
+    }
+    fetchRaceIds()
+  }, [])
   // 1秒に1回データを取得する
   useEffect(() => {
     const interval = setInterval(() => {
       const fetchData = async () => {
         const data = (await getData(selected)) as Data[]
+        const raceIds = await getRaceIds()
         const newData = data.map((d) => {
           return {
             ...d,
@@ -54,6 +43,9 @@ export default function Home() {
           }
         })
         setData(newData)
+        setRaceIds(
+          raceIds as Race[],
+        )
         // setData(data)
         setLastData(data[data.length - 1])
       }

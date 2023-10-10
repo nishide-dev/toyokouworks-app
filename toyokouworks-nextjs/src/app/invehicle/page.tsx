@@ -35,7 +35,11 @@ export default function Home() {
     const interval = setInterval(() => {
       const fetchData = async () => {
         const data = (await getData(selected)) as Data[]
+        const raceIds = await getRaceIds()
         setData(data)
+        setRaceIds(
+          raceIds as Race[],
+        )
         setLastData(data[data.length - 1])
       }
       fetchData()
