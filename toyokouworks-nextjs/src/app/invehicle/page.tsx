@@ -47,7 +47,7 @@ export default function Home() {
         const diff = now.getTime() - lastDate.getTime()
         if (diff > 10000) {
           setConnected(false)
-        } else if (diff < 10) {
+        } else if (diff == 0) {
           setConnected(false)
         } else {
           setConnected(true)
@@ -73,6 +73,7 @@ export default function Home() {
             <Select
             label='Select Race ID'
             className='max-w-xs'
+            showScrollIndicators={true}
             value={selected}
             onChange={handleSlectionChange}
             >
