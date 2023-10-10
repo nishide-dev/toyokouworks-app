@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server'
 
 import prisma from '@/lib/prisma'
 
-export const GET = async (request: Request) => {
+export const POST = async (request: Request) => {
   const data = await prisma.race.findMany({
     where: {
       deleted: false,

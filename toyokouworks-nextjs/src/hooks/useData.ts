@@ -32,7 +32,7 @@ export const useData = function () {
   const getRaceIds = async () => {
     setIsGetting(true)
     try {
-      const response = (await fetchJson('/api/raceId')) as {
+      const response = (await fetchJson('/api/raceId', 'POST', {})) as {
         name: string
         createdAt: Date
       }[]
