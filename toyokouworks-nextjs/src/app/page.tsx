@@ -13,6 +13,7 @@ const dataFormatter = (number: number) => {
 export default function Home() {
   const [data, setData] = useState<Data[]>([])
   const [lastData, setLastData] = useState<Data>()
+  const [connected, setConnected] = useState<boolean>(false)
   const [raceIds, setRaceIds] = useState<
     {
       name: string
@@ -47,12 +48,23 @@ export default function Home() {
           raceIds as Race[],
         )
         // setData(data)
-        setLastData(data[data.length - 1])
+        const lastData = data[data.length - 1]
+        const lastDate = lastData ? new Date(lastData.createdAt) : new Date()
+        const now = new Date()
+        const diff = now.getTime() - lastDate.getTime()
+        if (diff > 10000) {
+          setConnected(false)
+        } else if (diff < 100) {
+          setConnected(false)
+        } else {
+          setConnected(true)
+        }
+        setLastData(lastData)
       }
       fetchData()
     }, 1000)
     return () => clearInterval(interval)
-  })
+  }, [selected])
 
   const handleSlectionChange = async (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelected(e.target.value)
@@ -78,9 +90,9 @@ export default function Home() {
             ))}
             </Select>
             <Chip
-                color='danger'
+                color={connected ? 'primary' : 'danger'}
             >
-                disconnected
+                {connected ? 'Connected' : 'Disconnected'}
             </Chip>
         </div>
         <div className="bg-blue-500 p-3 px-6 mt-3 max-w-sm md:max-w-[15rem] text-white rounded-2xl w-full">
