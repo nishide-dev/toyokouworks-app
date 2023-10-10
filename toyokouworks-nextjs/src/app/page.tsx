@@ -54,7 +54,7 @@ export default function Home() {
         const diff = now.getTime() - lastDate.getTime()
         if (diff > 10000) {
           setConnected(false)
-        } else if (diff < 100) {
+        } else if (diff < 10) {
           setConnected(false)
         } else {
           setConnected(true)
