@@ -12,6 +12,10 @@ export const POST = async (request: Request) => {
     select: {
       current: true,
       voltage: true,
+      integratedCurrent: true,
+      gpsSpeed: true,
+      lat: true,
+      lng: true,
       createdAt: true,
     },
   })
