@@ -89,7 +89,7 @@ export default function Home() {
                 {connected ? 'Connected' : 'Disconnected'}
             </Chip>
         </div>
-        <div className="bg-blue-500 flex gap-5 items-center p-4 px-6 mt-3 max-w-[10rem] md:max-w-[10rem] text-white rounded-2xl w-full">
+        <div className="bg-blue-500 flex gap-5 items-center p-4 px-6 mt-3 max-w-[13rem] md:max-w-[13rem] text-white rounded-2xl w-full">
             <h4 className='text-xs'>Battery</h4>
             <h2 className='text-xl'>{lastData?.integratedCurrent ? Math.floor((((3600 - lastData.integratedCurrent) / 3600) * 100) * Math.pow( 10, n )) / Math.pow( 10, n ) : 0.00} %</h2>
         </div>
