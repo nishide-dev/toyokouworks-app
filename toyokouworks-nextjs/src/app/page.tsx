@@ -18,7 +18,7 @@ const Map = ({ lat, lng }: {
   // Google Mapsの初期設定
   const mapContainerStyle = {
     width: '100%',
-    height: '400px',
+    height: '30rem',
   };
 
   const center = {
@@ -32,7 +32,7 @@ const Map = ({ lat, lng }: {
   >
     <GoogleMap
       mapContainerStyle={mapContainerStyle}
-      zoom={14}
+      zoom={16}
       center={center}
     >
       {lat && lng && <Marker position={center} />}
@@ -190,13 +190,13 @@ export default function Home() {
             valueFormatter={dataFormatter}
           />
         </Card>
-        <Card>
-          <div className='flex justify-between'>
+      </div>
+      <Card className='m-6'>
+          <div className='flex flex-col gap-4 justify-between'>
             <Title>Google Map</Title>
             <Map lat={lastData?.lat ?? 0} lng={lastData?.lng ?? 0} /> {/* Google Mapコンポーネントを表示 */}
           </div>
         </Card>
-      </div>
     </>
   )
 }
