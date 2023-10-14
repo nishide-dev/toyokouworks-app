@@ -1,14 +1,46 @@
 'use client'
 import { Select, SelectItem, Chip } from '@nextui-org/react'
 import { Data, Race } from '@prisma/client'
+import { GoogleMap, Marker, LoadScript } from '@react-google-maps/api';
 import { Card, Title, AreaChart } from '@tremor/react'
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useData } from '@/hooks/useData'
 
 const dataFormatter = (number: number) => {
   return Intl.NumberFormat('us').format(number).toString()
 }
+
+const Map = ({ lat, lng }: {
+  lat: number | null
+  lng: number | null
+}) => {
+  // Google Mapsの初期設定
+  const mapContainerStyle = {
+    width: '100%',
+    height: '400px',
+  };
+
+  const center = {
+    lat: lat || 0, // latが渡されない場合は0を使用
+    lng: lng || 0, // lngが渡されない場合は0を使用
+  };
+
+  return (
+    <LoadScript
+    googleMapsApiKey={process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY as string}
+  >
+    <GoogleMap
+      mapContainerStyle={mapContainerStyle}
+      zoom={14}
+      center={center}
+    >
+      {lat && lng && <Marker position={center} />}
+    </GoogleMap>
+  </LoadScript>
+  );
+};
+
 
 export default function Home() {
   const [data, setData] = useState<Data[]>([])
@@ -157,6 +189,12 @@ export default function Home() {
             colors={['orange']}
             valueFormatter={dataFormatter}
           />
+        </Card>
+        <Card>
+          <div className='flex justify-between'>
+            <Title>Google Map</Title>
+            <Map lat={lastData?.lat ?? 0} lng={lastData?.lng ?? 0} /> {/* Google Mapコンポーネントを表示 */}
+          </div>
         </Card>
       </div>
     </>
