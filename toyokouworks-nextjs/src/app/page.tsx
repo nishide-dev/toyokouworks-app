@@ -126,7 +126,7 @@ export default function Home() {
             data={data}
             index='createdAt'
             categories={['voltage']}
-            colors={['cyan']}
+            colors={['teal']}
             valueFormatter={dataFormatter}
           />
         </Card>
@@ -141,6 +141,20 @@ export default function Home() {
             index='createdAt'
             categories={['power']}
             colors={['indigo']}
+            valueFormatter={dataFormatter}
+          />
+        </Card>
+        <Card>
+          <div className='flex justify-between'>
+            <Title>Speed(G)</Title>
+            <Title>{lastData?.gpsSpeed ? Math.floor((lastData.gpsSpeed) * Math.pow( 10, n )) / Math.pow( 10, n ) : 0.00} km/h</Title>
+          </div>
+          <AreaChart
+            className='h-72 mt-4'
+            data={data}
+            index='createdAt'
+            categories={['gpsSpeed']}
+            colors={['orange']}
             valueFormatter={dataFormatter}
           />
         </Card>
