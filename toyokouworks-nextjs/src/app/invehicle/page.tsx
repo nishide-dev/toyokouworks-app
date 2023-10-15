@@ -14,6 +14,7 @@ export default function Home() {
   const [data, setData] = useState<Data[]>([])
   const [lastData, setLastData] = useState<Data>()
   const [connected, setConnected] = useState<boolean>(false)
+  const [currentColor, setCurrentColor] = useState<"yellow" | "red" | "slate" | "gray" | "zinc" | "neutral" | "stone" | "orange" | "amber" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia" | "pink" | "rose" | undefined>('neutral')
   const [raceIds, setRaceIds] = useState<
     {
       name: string
@@ -43,6 +44,13 @@ export default function Home() {
         )
         const lastData = data[data.length - 1]
         const lastDate = lastData ? new Date(lastData.createdAt) : new Date()
+        if (lastData?.current > 8000) {
+          setCurrentColor('yellow')
+        } else if (lastData?.current > 10000) {
+          setCurrentColor('red')
+        } else {
+          setCurrentColor('neutral')
+        }
         const now = new Date()
         const diff = now.getTime() - lastDate.getTime()
         if (diff > 10000) {
@@ -98,7 +106,7 @@ export default function Home() {
         <Card>
           <div className='flex justify-between'>
             <Title>Current</Title>
-            <Title>{lastData?.current ? Math.floor( lastData?.current * Math.pow( 10, n ) ) / Math.pow( 10, n ) : 0} mA</Title>
+            <Title color={currentColor}>{lastData?.current ? Math.floor( lastData?.current * Math.pow( 10, n ) ) / Math.pow( 10, n ) : 0} mA</Title>
           </div>
         </Card>
         <Card>
