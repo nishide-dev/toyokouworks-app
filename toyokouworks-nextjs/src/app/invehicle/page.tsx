@@ -14,7 +14,7 @@ export default function Home() {
   const [data, setData] = useState<Data[]>([])
   const [lastData, setLastData] = useState<Data>()
   const [connected, setConnected] = useState<boolean>(false)
-  const [currentColor, setCurrentColor] = useState<"yellow" | "red" | "slate" | "gray" | "zinc" | "neutral" | "stone" | "orange" | "amber" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia" | "pink" | "rose" | undefined>('neutral')
+  const [currentColor, setCurrentColor] = useState<"yellow" | "red" | "slate" | "gray" | "zinc" | "neutral" | "stone" | "orange" | "amber" | "lime" | "green" | "emerald" | "teal" | "cyan" | "sky" | "blue" | "indigo" | "violet" | "purple" | "fuchsia" | "pink" | "rose" | undefined>(undefined)
   const [raceIds, setRaceIds] = useState<
     {
       name: string
@@ -49,7 +49,7 @@ export default function Home() {
         } else if (lastData?.current > 10000) {
           setCurrentColor('red')
         } else {
-          setCurrentColor('neutral')
+          setCurrentColor(undefined)
         }
         const now = new Date()
         const diff = now.getTime() - lastDate.getTime()
